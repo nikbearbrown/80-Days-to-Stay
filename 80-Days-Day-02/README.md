@@ -4,6 +4,116 @@
 
 ## What We Built Today
 
+# SEC Form D Analysis: Key Findings (2014-2025)
+
+## Overall Statistics
+
+**Total Dataset:**
+- **568,707** total companies filed Form D
+- **246,572** companies (43.4%) raised $5M+
+- **190** states/territories covered
+
+---
+
+## Geographic Distribution
+
+### Top 3 States by Volume
+
+**1. New York**
+- 91,662 total companies
+- 53,355 raised $5M+ (58% high-value rate)
+- Highest concentration of high-value deals
+
+**2. California**
+- 81,782 total companies
+- 35,608 raised $5M+ (44% high-value rate)
+- Strong tech/startup ecosystem
+
+**3. Texas**
+- 41,017 total companies
+- 14,342 raised $5M+ (35% high-value rate)
+- Emerging market
+
+### Your Target Geography (MA/CA/NY)
+
+**Combined Market Power:**
+- 199,174 total companies (35% of national total)
+- 103,008 companies raised $5M+ (42% of all high-value companies)
+- Represents the most concentrated opportunity for high-quality prospects
+
+---
+
+## Industry Breakdown
+
+### Top 5 Industries Overall
+
+| Rank | Industry | Total Companies | % Over $5M |
+|------|----------|----------------|------------|
+| 1 | Pooled Investment Funds | 57,014 | 67% |
+| 2 | Real Estate | 23,931 | 50% |
+| 3 | Commercial | 14,507 | 40% |
+| 4 | Banking & Financial Services | 11,668 | 43% |
+| 5 | Other | 11,127 | 46% |
+
+**Note:** Pooled Investment Funds includes hedge funds, VC funds, and private equity
+
+### Tech-Related Industries (High Visa Sponsorship Potential)
+
+| Industry | Total Companies | % Over $5M | Sponsorship Likelihood |
+|----------|----------------|------------|----------------------|
+| Pharmaceuticals | 5,425 | 54% | Very High |
+| Biotechnology | 9,835 | 49% | Very High |
+| Computers/Technology | 10,480 | 47% | High |
+| Telecommunications | 8,697 | 39% | Moderate-High |
+
+**Combined tech sector: ~34,437 companies, ~48% raised $5M+**
+
+---
+
+## Strategic Implications for Your Database Product
+
+### The Filtering Funnel
+
+```
+568,707 total companies
+    ↓ Filter: MA/CA/NY
+199,174 companies (35% of total)
+    ↓ Filter: Raised $5M+
+103,008 high-value companies (42% of all $5M+ companies)
+    ↓ Filter: Tech/Bio/Pharma industries
+~30,000 highly relevant companies
+    ↓ Filter: Filed within last 12 months
+~5,000-8,000 actively hiring NOW
+```
+
+### Your $10 Database Sweet Spot
+
+**Target Profile:**
+- **Geography:** MA, CA, or NY
+- **Funding Level:** $5M+ (demonstrates growth capacity)
+- **Industry:** Tech, Biotech, Pharma (high sponsorship rates)
+- **Recency:** <12 months (actively scaling/hiring)
+
+**Expected Database Size:** 5,000-8,000 premium prospects
+
+**Value Proposition:** 
+- Pre-qualified for financial stability
+- Geographic concentration in visa-friendly states
+- Industry focus on high-sponsorship sectors
+- Timing optimized for active hiring cycles
+
+---
+
+## Competitive Advantage
+
+Your dataset uniquely combines:
+1. **SEC validation** (verified funding levels)
+2. **Geographic targeting** (highest-value states)
+3. **Industry filtering** (visa-sponsorship correlation)
+4. **Temporal relevance** (recent filers = active growth)
+
+This is exponentially more valuable than generic company lists.
+
 ### 1. Understanding SEC Form D Data Structure
 - **Learned the data model**: Each quarterly ZIP contains 4 key TSV files:
   - `OFFERING.tsv` - Funding amounts, industry, investor counts
