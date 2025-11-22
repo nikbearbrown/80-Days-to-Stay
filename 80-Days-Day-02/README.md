@@ -1,6 +1,6 @@
 # Day 02
 
-# Day 1 Summary: SEC Form D Data Acquisition & Processing
+# Day 2 Summary: SEC Form D Data Acquisition & Processing
 
 ## What We Built Today
 
