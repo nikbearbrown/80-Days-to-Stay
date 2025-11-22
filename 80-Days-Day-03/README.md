@@ -1,5 +1,15 @@
 # Day 03
+# Development Sprint Abstract 
 
+Over the next week of evening work sessions (2-3 hours each), we will transform raw SEC Form D data into a functional, crowdsourced verification platform. The sprint begins with data filtering: processing the 568,707 company dataset to extract 8,000-12,000 high-potential targets by applying funding thresholds ($1M+), geographic filters (MA/CA/NY/WA/TX/IL), and industry exclusions (removing real estate, pooled investment funds, and other low-sponsorship sectors). Days 2-3 focus on domain discovery and verification: implementing pattern-based inference to generate candidate domains for each company, validating existence through DNS and HTTP checks, and supplementing with CommonCrawl API searches to achieve 80%+ domain coverage. Mid-week tasks establish the technical infrastructure: setting up Vercel Postgres database with three-tier schema (companies, verification_submissions, published_companies), deploying a Next.js application to Vercel, and building the public-facing verification form interface. The latter half of the week implements the quality control pipeline: developing bot validation functions that automatically verify domain existence, careers page accessibility, visa text claims, and spam detection; creating submission APIs that trigger asynchronous bot checks; and building aggregation logic that publishes company data only after 3+ bot-verified human submissions with no spam flags. By week's end, we'll have a working prototype where users can submit verifications, bots automatically validate submissions, and verified data publishes to a searchable database—establishing the foundation for Week 2's volunteer recruitment and Google Ads campaigns that will scale verification through crowdsourced traffic.
+
+
+**Week Development Goals:**
+- **Data Pipeline:** Filter SEC data from 568K → 10K companies, infer and verify domains (80% coverage), extract careers pages and ATS platforms
+- **Database Infrastructure:** Deploy Vercel Postgres with three-tier schema, migrate filtered companies, establish verification workflow tables
+- **Web Application:** Build Next.js verification form, deploy to Vercel, create submission API with bot validation triggers
+- **Quality Control:** Implement automated bot checks (domain, careers page, visa text, spam detection), aggregation logic for publishing verified data
+- **Milestone:** Working prototype where users verify companies → bots validate → data publishes automatically after 3+ confirmations
 # 80 Days to Stay - Evening Work ToDo List
 
 ## Day 1 (Tonight) - Data Filtering & Setup (2-3 hours)
