@@ -58,3 +58,86 @@ The DOL also provides similar data for:
 4. **Complementary to Your SEC Data:** This gives you a different angle - companies that have **proven history** of visa sponsorship, not just funding status.
 
 The DOL LCA data is particularly valuable because every H-1B petition **must** have a certified LCA first, so this represents actual sponsorship activity, not just potential.
+
+
+I'll search for the major ATS systems currently used by companies.Based on the latest research, here are the **major ATS systems** you should focus on:
+
+## **Top 5 ATS Systems (Fortune 500 - 2025 Data)**
+
+### **1. Workday** - 39.3% market share
+- **The #1 ATS** among Fortune 500 companies by far
+- Enterprise-level, all-in-one HR platform
+- Known for lengthy applications requiring unique account creation
+- Resume parser often needs manual correction (15-20 min per application)
+- Used by major retailers, banks, healthcare companies
+
+### **2. SuccessFactors (SAP)** - 13.2% market share
+- Second most popular among Fortune 500
+- Part of SAP's HR suite
+- Enterprise-focused
+
+### **3. Taleo (Oracle)** - Declining but still significant
+- Was previously tied with Workday (~22% in 2019)
+- One of the oldest, most established systems
+- Known for lengthy multi-page applications
+- Heavy use of "knockout questions" (wrong answer = auto-rejection)
+- Used by large banks, retail, manufacturing
+
+### **4. iCIMS** - ~7-8% market share
+- Enduring presence in enterprise
+- Growing steadily
+
+### **5. Greenhouse** - Growing rapidly
+- **The one you mentioned!** 
+- Modern, tech-focused ATS
+- Very popular with startups and tech companies
+- **Publicly accessible JSON feeds** (as you discovered!)
+- Easy to detect via URL pattern: `greenhouse.io/[company-name]`
+- Clean, fast application process
+- Started at 0.4% of Fortune 500 in 2019, now growing
+
+## **Other Major Modern ATS Systems**
+
+### **Lever** 
+- Greenhouse's main competitor
+- Modern recruiting platform with CRM features
+- Popular with tech and high-growth companies
+- Fast, user-friendly
+
+### **SmartRecruiters**
+- Growing among mid-size to large companies
+- Modern interface
+
+### **Jobvite**
+- Social recruiting features
+
+### **BambooHR**
+- Popular with SMBs
+- Seamless transition from candidate to employee
+
+### **Others Worth Noting:**
+- **Workable** - Mid-market favorite
+- **JazzHR** - Small business focus
+- **Eightfold** - AI-powered, skills-based matching
+- **PhenomPeople** - AI chatbots and personalization
+
+## **Key Stats:**
+- **97.8%** of Fortune 500 companies use a detectable ATS
+- **Combined dominance**: Workday + SuccessFactors = 52.4% of Fortune 500
+- Among **12,820+ companies** (broader market), distribution is much more varied
+
+## **For Your "80 Days to Stay" Project:**
+
+Since you're building detection for the top systems, I'd focus on:
+
+1. **Greenhouse** ✓ (you've already got this working!)
+2. **Workday** 
+3. **Lever**
+4. **Taleo**
+5. **iCIMS**
+
+These five will likely cover the majority of companies that international students would target. Your assumption is correct - if it's not one of the top 5-10, they're probably reviewing manually or using a proprietary system.
+
+The Greenhouse approach you described (trying `company-name.greenhouse.io`) works well. Similar patterns exist for other systems:
+- **Lever**: `jobs.lever.co/[company-name]`
+- **Workday**: More complex, usually `[company].wd1.myworkdayjobs.com` or similar
