@@ -2,6 +2,7 @@
 
 > *"A wager against time, a race against bureaucracy, and an adventure in data for good."*
 
+
 ## The Challenge
 
 Like Phileas Fogg's famous 80-day race around the world, we're on a mission against the clock. But instead of circumnavigating the globe, we're building a lifeline for international students and skilled workers facing visa deadlines.
