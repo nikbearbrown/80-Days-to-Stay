@@ -2,6 +2,15 @@
 
 > *"A wager against time, a race against bureaucracy, and an adventure in data for good."*
 
+## Progress Day 08:
+
+**Mapping the Visa Data Goldmine**
+
+Objective: Intersect financial capacity (SEC data) with historical sponsorship willingness (DOL data) and deploy LLM agents to act as "Recruiting Experts" for international talent.
+
+**What We've Accomplished**
+
+We have created a csv master file after identifying companies that are likely to hire to those that are historically proven to hire international talent. We mapped our SEC startup list against official U.S. Government datasets, specifically the DOL LCA Disclosure Data (containing every H-1B, H-1B1, and E-3 application) and the USCIS H-1B Employer Data Hub (providing approval/denial rates for initial vs. continuing employment).
 
 ## The Challenge
 
