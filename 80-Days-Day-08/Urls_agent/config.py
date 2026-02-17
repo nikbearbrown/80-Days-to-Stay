@@ -1,0 +1,3 @@
+MODEL = "gemini-2.5-flash"
+RPM_LIMIT = 900
+THREAD_WORKERS = 40
