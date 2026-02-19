@@ -3,7 +3,6 @@ Tests for company name normalization utilities.
 Run: pytest tests/test_normalize.py -v
 """
 
-import pytest
 from scrapers.common.normalize import normalize_company_name, epoch_ms_to_iso8601
 
 
