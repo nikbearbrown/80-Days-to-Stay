@@ -1,0 +1,96 @@
+"""
+Company name normalization and file-reading utilities.
+Extracted from professor's reference scripts to avoid duplication.
+
+Usage:
+    from scrapers.common.normalize import normalize_company_name, read_companies_from_file
+
+    slug = normalize_company_name("Databricks, Inc.")  # -> "databricks"
+    companies = read_companies_from_file("companies.txt")
+"""
+
+import re
+import sys
+from typing import List
+
+from .config import COMPANY_SUFFIXES, FILE_ENCODINGS
+from .logger import get_logger
+
+logger = get_logger("normalize", file=False)
+
+
+def normalize_company_name(name: str) -> str:
+    """
+    Convert a company name to a URL-safe slug for ATS lookups.
+
+    Strips common legal suffixes (Inc., LLC, Corp., etc.),
+    removes special characters, and lowercases.
+
+    Args:
+        name: Raw company name (e.g., "Databricks, Inc.").
+
+    Returns:
+        URL-safe slug (e.g., "databricks").
+    """
+    cleaned = name.strip()
+
+    for suffix in COMPANY_SUFFIXES:
+        cleaned = re.sub(suffix, "", cleaned, flags=re.IGNORECASE)
+
+    # Remove commas, periods, spaces, hyphens, ampersands, apostrophes
+    cleaned = cleaned.strip()
+    cleaned = re.sub(r"[,.\s\-&\']", "", cleaned)
+
+    return cleaned.lower()
+
+
+def read_companies_from_file(filepath: str) -> List[str]:
+    """
+    Read company names from a text file, one per line.
+    Tries multiple encodings to handle various file formats.
+
+    Args:
+        filepath: Path to the company list file.
+
+    Returns:
+        List of company name strings.
+
+    Raises:
+        SystemExit: If file not found or cannot be decoded.
+    """
+    for encoding in FILE_ENCODINGS:
+        try:
+            with open(filepath, "r", encoding=encoding) as f:
+                companies = [line.strip() for line in f if line.strip()]
+                if companies:
+                    logger.info(
+                        "Read %d companies from %s (encoding: %s)",
+                        len(companies),
+                        filepath,
+                        encoding,
+                    )
+                    return companies
+        except (UnicodeDecodeError, UnicodeError):
+            continue
+        except FileNotFoundError:
+            logger.error("File not found: %s", filepath)
+            sys.exit(1)
+
+    logger.error("Could not decode file %s with any supported encoding", filepath)
+    sys.exit(1)
+
+
+def epoch_ms_to_iso8601(epoch_ms: int) -> str:
+    """
+    Convert epoch milliseconds (e.g., from Lever API) to ISO 8601 string.
+
+    Args:
+        epoch_ms: Unix timestamp in milliseconds.
+
+    Returns:
+        ISO 8601 formatted datetime string.
+    """
+    from datetime import datetime, timezone
+
+    dt = datetime.fromtimestamp(epoch_ms / 1000, tz=timezone.utc)
+    return dt.isoformat()
