@@ -4,7 +4,6 @@ Run: pytest tests/test_rate_limiter.py -v
 """
 
 import time
-import pytest
 from scrapers.common.rate_limiter import RateLimiter
 
 
