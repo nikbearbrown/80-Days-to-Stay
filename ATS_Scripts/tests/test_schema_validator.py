@@ -129,6 +129,8 @@ class TestValidateBatch:
         assert report["valid"] == 5
         assert report["invalid"] == 0
         assert report["batch_passed"] is True
+        assert report["has_valid_records"] is True
+        assert report["partial_success"] is False
 
     def test_mixed_batch(self):
         jobs = [
@@ -140,6 +142,9 @@ class TestValidateBatch:
         assert report["total"] == 3
         assert report["valid"] == 2
         assert report["invalid"] == 1
+        assert report["batch_passed"] is False
+        assert report["has_valid_records"] is True
+        assert report["partial_success"] is True
 
     def test_strict_mode_fails_on_any_error(self):
         jobs = [
@@ -148,8 +153,11 @@ class TestValidateBatch:
         ]
         report = validate_batch(jobs, strict=True)
         assert report["batch_passed"] is False
+        assert report["strict"] is True
 
     def test_empty_batch(self):
         report = validate_batch([])
         assert report["total"] == 0
         assert report["pass_rate"] == "N/A"
+        assert report["batch_passed"] is True
+        assert report["has_valid_records"] is False

@@ -191,7 +191,10 @@ def validate_batch(
         "invalid": invalid_count,
         "pass_rate": f"{(valid_count / total * 100):.1f}%" if total > 0 else "N/A",
         "errors": all_errors,
-        "batch_passed": invalid_count == 0 if strict else valid_count > 0,
+        "batch_passed": invalid_count == 0,
+        "has_valid_records": valid_count > 0,
+        "partial_success": valid_count > 0 and invalid_count > 0,
+        "strict": strict,
     }
 
     if all_errors:

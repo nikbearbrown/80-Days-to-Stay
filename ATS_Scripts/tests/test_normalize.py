@@ -3,7 +3,12 @@ Tests for company name normalization utilities.
 Run: pytest tests/test_normalize.py -v
 """
 
-from scrapers.common.normalize import normalize_company_name, epoch_ms_to_iso8601
+import pytest
+from scrapers.common.normalize import (
+    normalize_company_name,
+    epoch_ms_to_iso8601,
+    read_companies_from_file,
+)
 
 
 class TestNormalizeCompanyName:
@@ -75,3 +80,23 @@ class TestEpochMsToIso8601:
         # Should be parseable as ISO 8601
         from datetime import datetime
         datetime.fromisoformat(result)  # should not raise
+
+
+class TestReadCompaniesFromFile:
+    """Tests for read_companies_from_file() error handling."""
+
+    def test_file_not_found_raises(self, tmp_path):
+        with pytest.raises(FileNotFoundError):
+            read_companies_from_file(str(tmp_path / "nonexistent.txt"))
+
+    def test_reads_valid_file(self, tmp_path):
+        companies_file = tmp_path / "companies.txt"
+        companies_file.write_text("Acme\nWidgets Inc\nFooCorp\n", encoding="utf-8")
+        result = read_companies_from_file(str(companies_file))
+        assert result == ["Acme", "Widgets Inc", "FooCorp"]
+
+    def test_skips_blank_lines(self, tmp_path):
+        companies_file = tmp_path / "companies.txt"
+        companies_file.write_text("Acme\n\n  \nWidgets\n", encoding="utf-8")
+        result = read_companies_from_file(str(companies_file))
+        assert result == ["Acme", "Widgets"]

@@ -10,7 +10,6 @@ Usage:
 """
 
 import re
-import sys
 from typing import List
 
 from .config import COMPANY_SUFFIXES, FILE_ENCODINGS
@@ -56,7 +55,8 @@ def read_companies_from_file(filepath: str) -> List[str]:
         List of company name strings.
 
     Raises:
-        SystemExit: If file not found or cannot be decoded.
+        FileNotFoundError: If file does not exist.
+        ValueError: If file cannot be decoded with any supported encoding.
     """
     for encoding in FILE_ENCODINGS:
         try:
@@ -74,10 +74,10 @@ def read_companies_from_file(filepath: str) -> List[str]:
             continue
         except FileNotFoundError:
             logger.error("File not found: %s", filepath)
-            sys.exit(1)
+            raise
 
     logger.error("Could not decode file %s with any supported encoding", filepath)
-    sys.exit(1)
+    raise ValueError(f"Could not decode file {filepath} with any supported encoding")
 
 
 def epoch_ms_to_iso8601(epoch_ms: int) -> str:
