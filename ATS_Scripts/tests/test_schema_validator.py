@@ -3,7 +3,6 @@ Tests for the unified schema validator.
 Run: pytest tests/test_schema_validator.py -v
 """
 
-import pytest
 from scrapers.common.schema_validator import validate_job_record, validate_batch
 
 
