@@ -61,7 +61,8 @@ def read_companies_from_file(filepath: str) -> List[str]:
         filepath: Path to the company list file.
 
     Returns:
-        List of company name strings.
+        List of company name strings, or an empty list if the file
+        contains no non-blank lines.
 
     Raises:
         FileNotFoundError: If file does not exist.
@@ -71,6 +72,7 @@ def read_companies_from_file(filepath: str) -> List[str]:
         try:
             with open(filepath, "r", encoding=encoding) as f:
                 companies = [line.strip() for line in f if line.strip()]
+                # Successfully decoded — return even if empty
                 if companies:
                     logger.info(
                         "Read %d companies from %s (encoding: %s)",
@@ -78,7 +80,9 @@ def read_companies_from_file(filepath: str) -> List[str]:
                         filepath,
                         encoding,
                     )
-                    return companies
+                else:
+                    logger.warning("File %s is empty (no non-blank lines)", filepath)
+                return companies
         except (UnicodeDecodeError, UnicodeError):
             continue
         except FileNotFoundError:

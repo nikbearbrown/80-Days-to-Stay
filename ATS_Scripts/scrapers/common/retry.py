@@ -51,7 +51,11 @@ def retry_request(
         **kwargs: Additional arguments passed to requests.request().
 
     Returns:
-        requests.Response on success, or None if all retries exhausted.
+        requests.Response on success or after all retries are exhausted
+        (including error responses, so callers can inspect the status code).
+        Returns None only if a network-level error (timeout, connection
+        error, or unrecoverable exception) occurs and all retries are
+        exhausted.
     """
     if retryable_status_codes is None:
         retryable_status_codes = RETRYABLE_STATUS_CODES

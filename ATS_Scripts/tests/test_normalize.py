@@ -105,3 +105,15 @@ class TestReadCompaniesFromFile:
         companies_file.write_text("Acme\n\n  \nWidgets\n", encoding="utf-8")
         result = read_companies_from_file(str(companies_file))
         assert result == ["Acme", "Widgets"]
+
+    def test_empty_file_returns_empty_list(self, tmp_path):
+        companies_file = tmp_path / "companies.txt"
+        companies_file.write_text("", encoding="utf-8")
+        result = read_companies_from_file(str(companies_file))
+        assert result == []
+
+    def test_blank_lines_only_returns_empty_list(self, tmp_path):
+        companies_file = tmp_path / "companies.txt"
+        companies_file.write_text("\n  \n\n", encoding="utf-8")
+        result = read_companies_from_file(str(companies_file))
+        assert result == []
