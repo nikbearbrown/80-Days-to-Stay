@@ -37,12 +37,11 @@ def get_logger(
     """
     logger = logging.getLogger(f"ats_scraper.{name}")
 
-    # If logger already has handlers, update its level and reuse it
-    if logger.handlers:
-        logger.setLevel(level)
-        for handler in logger.handlers:
-            handler.setLevel(level)
-        return logger
+    # Clear existing handlers so the logger is fully reconfigured
+    # with the current console/file/level settings on every call.
+    for handler in logger.handlers[:]:
+        handler.close()
+        logger.removeHandler(handler)
 
     logger.setLevel(level)
 

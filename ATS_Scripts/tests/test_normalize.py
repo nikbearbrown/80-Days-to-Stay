@@ -62,6 +62,11 @@ class TestNormalizeCompanyName:
         # Only the matching suffix should be removed
         assert normalize_company_name("Company Co.") == "company"
 
+    def test_chained_suffixes(self):
+        # Multiple suffixes stripped in successive passes
+        assert normalize_company_name("Mega Corporation Inc.") == "mega"
+        assert normalize_company_name("Global Corp. LLC") == "global"
+
 
 class TestEpochMsToIso8601:
     """Tests for epoch_ms_to_iso8601()."""

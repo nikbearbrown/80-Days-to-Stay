@@ -97,6 +97,14 @@ def validate_job_record(job: Dict[str, Any]) -> Tuple[bool, List[str]]:
         elif not job[field].strip():
             errors.append(f"Required field '{field}' is empty")
 
+    # Check optional fields types (only when present)
+    for field, expected_type in OPTIONAL_FIELDS.items():
+        if field in job and not isinstance(job[field], expected_type):
+            errors.append(
+                f"Optional field '{field}' should be {expected_type.__name__}, "
+                f"got {type(job[field]).__name__}"
+            )
+
     # Check ats_source value
     if job.get("ats_source") and job["ats_source"] not in VALID_ATS_SOURCES:
         errors.append(
@@ -133,6 +141,14 @@ def validate_job_record(job: Dict[str, Any]) -> Tuple[bool, List[str]]:
                 errors.append(
                     f"Metadata field '{field}' should be {expected_type.__name__}, "
                     f"got {type(metadata[field]).__name__}"
+                )
+
+        # Check optional metadata fields types (only when present)
+        for field, expected_type in METADATA_OPTIONAL_FIELDS.items():
+            if field in metadata and not isinstance(metadata[field], expected_type):
+                errors.append(
+                    f"Optional metadata field '{field}' should be "
+                    f"{expected_type.__name__}, got {type(metadata[field]).__name__}"
                 )
 
         # Validate scraped_at is ISO 8601
@@ -191,7 +207,7 @@ def validate_batch(
         "invalid": invalid_count,
         "pass_rate": f"{(valid_count / total * 100):.1f}%" if total > 0 else "N/A",
         "errors": all_errors,
-        "batch_passed": invalid_count == 0,
+        "batch_passed": invalid_count == 0 if strict else (valid_count > 0 or total == 0),
         "has_valid_records": valid_count > 0,
         "partial_success": valid_count > 0 and invalid_count > 0,
         "strict": strict,

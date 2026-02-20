@@ -22,6 +22,7 @@ from scrapers.common import (
     RateLimiter,
     retry_request,
     validate_job_record,
+    validate_batch,
 )
 
 logger = get_logger("greenhouse")

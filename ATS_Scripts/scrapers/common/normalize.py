@@ -10,6 +10,7 @@ Usage:
 """
 
 import re
+from datetime import datetime, timezone
 from typing import List
 
 from .config import COMPANY_SUFFIXES, FILE_ENCODINGS
@@ -33,8 +34,16 @@ def normalize_company_name(name: str) -> str:
     """
     cleaned = name.strip()
 
-    for suffix in COMPANY_SUFFIXES:
-        cleaned = re.sub(suffix, "", cleaned, flags=re.IGNORECASE)
+    # Loop until no more suffixes match (handles chained suffixes
+    # like "Mega Corporation Inc." → "Mega Corporation" → "Mega")
+    changed = True
+    while changed:
+        changed = False
+        for suffix in COMPANY_SUFFIXES:
+            result = re.sub(suffix, "", cleaned, flags=re.IGNORECASE)
+            if result != cleaned:
+                cleaned = result
+                changed = True
 
     # Remove commas, periods, spaces, hyphens, ampersands, apostrophes
     cleaned = cleaned.strip()
@@ -90,7 +99,5 @@ def epoch_ms_to_iso8601(epoch_ms: int) -> str:
     Returns:
         ISO 8601 formatted datetime string.
     """
-    from datetime import datetime, timezone
-
     dt = datetime.fromtimestamp(epoch_ms / 1000, tz=timezone.utc)
     return dt.isoformat()

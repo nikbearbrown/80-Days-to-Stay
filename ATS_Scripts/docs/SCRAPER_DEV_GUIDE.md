@@ -144,7 +144,7 @@ git push -u origin {your_name}/feature-{ats_name}-scraper
 | Normalizer | `from scrapers.common.normalize import normalize_company_name` | Company slug generation |
 | Rate Limiter | `from scrapers.common.rate_limiter import RateLimiter` | Respectful request throttling |
 | Retry | `from scrapers.common.retry import retry_request` | HTTP with exponential backoff |
-| Validator | `from scrapers.common.schema_validator import validate_job_record` | Output validation |
+| Validator | `from scrapers.common.schema_validator import validate_job_record, validate_batch` | Output validation |
 | Config | `from scrapers.common.config import *` | Global defaults |
 | Timestamp | `from scrapers.common.normalize import epoch_ms_to_iso8601` | Convert epoch ms to ISO 8601 |
 

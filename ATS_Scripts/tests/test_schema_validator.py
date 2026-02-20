@@ -118,6 +118,18 @@ class TestValidateJobRecord:
         assert is_valid is False
         assert any("job_id" in e for e in errors)
 
+    def test_optional_field_wrong_type_fails(self):
+        job = _make_valid_job(location=123)  # should be str, not int
+        is_valid, errors = validate_job_record(job)
+        assert is_valid is False
+        assert any("location" in e for e in errors)
+
+    def test_optional_field_missing_is_ok(self):
+        job = _make_valid_job()
+        del job["location"]  # optional field can be absent
+        is_valid, _ = validate_job_record(job)
+        assert is_valid is True
+
 
 class TestValidateBatch:
     """Tests for validate_batch()."""
@@ -132,28 +144,31 @@ class TestValidateBatch:
         assert report["has_valid_records"] is True
         assert report["partial_success"] is False
 
-    def test_mixed_batch(self):
+    def test_mixed_batch_non_strict(self):
         jobs = [
             _make_valid_job(job_id="1"),
             _make_valid_job(job_id=""),  # empty required field
             _make_valid_job(job_id="3"),
         ]
-        report = validate_batch(jobs)
+        report = validate_batch(jobs)  # strict=False by default
         assert report["total"] == 3
         assert report["valid"] == 2
         assert report["invalid"] == 1
-        assert report["batch_passed"] is False
+        assert report["batch_passed"] is True  # non-strict: passes if any valid
         assert report["has_valid_records"] is True
         assert report["partial_success"] is True
 
-    def test_strict_mode_fails_on_any_error(self):
+    def test_mixed_batch_strict(self):
         jobs = [
             _make_valid_job(job_id="1"),
-            _make_valid_job(job_id=""),  # invalid
+            _make_valid_job(job_id=""),  # empty required field
+            _make_valid_job(job_id="3"),
         ]
         report = validate_batch(jobs, strict=True)
-        assert report["batch_passed"] is False
+        assert report["batch_passed"] is False  # strict: fails if any invalid
         assert report["strict"] is True
+        assert report["has_valid_records"] is True
+        assert report["partial_success"] is True
 
     def test_empty_batch(self):
         report = validate_batch([])
