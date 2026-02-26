@@ -17,7 +17,7 @@ This confirms that Workable uses a REST-style API rather than embedded static HT
 ---
 
 ## Job Listing Endpoint
-
+ 
 Endpoint Pattern:
 https://apply.workable.com/api/v3/accounts/{company_slug}/jobs
 
